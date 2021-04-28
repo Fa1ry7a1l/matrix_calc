@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'EnterMatrix.dart';
+
 class Home extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -19,7 +21,7 @@ class _HomeState extends State<Home> {
       resizeToAvoidBottomInset: false,
       body: Center(
         child: Padding(
-          padding: EdgeInsets.all(40.0),
+          padding: EdgeInsets.all(20.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -35,8 +37,18 @@ class _HomeState extends State<Home> {
                   new DropdownButton<String>(
                     style: TextStyle(
                         fontSize: 20, color: Color.fromARGB(255, 0, 0, 0)),
-                    items: <String>['1', '2', '3', '4', '5', '6', '7']
-                        .map((String value) {
+                    items: <String>[
+                      '1',
+                      '2',
+                      '3',
+                      '4',
+                      '5',
+                      '6',
+                      '7',
+                      '8',
+                      '9',
+                      '10'
+                    ].map((String value) {
                       return new DropdownMenuItem<String>(
                         value: value,
                         child: new Text(
@@ -65,8 +77,18 @@ class _HomeState extends State<Home> {
                   new DropdownButton<String>(
                     style: TextStyle(
                         fontSize: 20, color: Color.fromARGB(255, 0, 0, 0)),
-                    items: <String>['1', '2', '3', '4', '5', '6', '7']
-                        .map((String value) {
+                    items: <String>[
+                      '1',
+                      '2',
+                      '3',
+                      '4',
+                      '5',
+                      '6',
+                      '7',
+                      '8',
+                      '9',
+                      '10'
+                    ].map((String value) {
                       return new DropdownMenuItem<String>(
                         value: value,
                         child: new Text(
@@ -95,8 +117,18 @@ class _HomeState extends State<Home> {
                   new DropdownButton<String>(
                     style: TextStyle(
                         fontSize: 20, color: Color.fromARGB(255, 0, 0, 0)),
-                    items: <String>['1', '2', '3', '4', '5', '6', '7']
-                        .map((String value) {
+                    items: <String>[
+                      '1',
+                      '2',
+                      '3',
+                      '4',
+                      '5',
+                      '6',
+                      '7',
+                      '8',
+                      '9',
+                      '10'
+                    ].map((String value) {
                       return new DropdownMenuItem<String>(
                         value: value,
                         child: new Text(
@@ -118,7 +150,6 @@ class _HomeState extends State<Home> {
                           fontSize: 20.0, color: Color.fromARGB(255, 0, 0, 0)),
                     ),
                   ),
-
                 ],
               ),
               MaterialButton(
@@ -127,6 +158,7 @@ class _HomeState extends State<Home> {
                 minWidth: 200.0,
                 child: Text("Создать матрицу"),
               ), // Добавить функцию генераци
+              new EnterMatrix(int.parse(a),int.parse(b),int.parse(l)),
             ],
           ),
         ),
