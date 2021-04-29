@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'EnterMatrix.dart';
+import 'ViewMatrix.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -185,6 +186,11 @@ class _HomeState extends State<Home> {
     List<List<List<int>>> matrList = a[0];
     List<List<String>> stringList = a[1];
     //printMatr(matrList.last,int.parse(l));
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => Show(matrList, stringList)),
+    );
   }
 
   List matrixSolution(List<List<int>> matr) {
@@ -224,20 +230,18 @@ class _HomeState extends State<Home> {
           for (int j = 0; j < matr[i].length; j++) {
             matr[i][j] = (matr[i][j] / x).truncate();
           }
-          resStr1.add("C${i+1}/${x}");
+          resStr1.add("C${i + 1}/${x}");
           break;
         }
       }
     }
     resMatr.add(matr);
     resStr.add(resStr1);
-    return [resMatr,resStr];
+    return [resMatr, resStr];
   }
 
-  void printMatr(List<List<int>> matr,int l)
-  {
-    for (int i = 0; i < matr.length; i++)
-    {
+  void printMatr(List<List<int>> matr, int l) {
+    for (int i = 0; i < matr.length; i++) {
       print(matr[i]);
     }
   }
