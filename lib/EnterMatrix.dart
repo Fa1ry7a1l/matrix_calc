@@ -21,6 +21,10 @@ class EnterMatrix extends StatelessWidget {
     }
   }
 
+  List<List<TextEditingController>> getControllers() {
+    return _textEditingControllers;
+  }
+
   @override
   Widget build(BuildContext context) {
     List<Row> rows = [];
@@ -28,23 +32,22 @@ class EnterMatrix extends StatelessWidget {
     for (int i = 0; i < _a; i++) {
       List<Container> texts = [];
       for (int j = 0; j < _b; j++) {
-        texts.add(
-          new Container(
-            width: 25,
-            child: new TextFormField(
-              controller: _textEditingControllers[i][j],
-              keyboardType: TextInputType.number,
-              textAlign: TextAlign.center,
-            ),
-
-          )
-        );
+        texts.add(new Container(
+          width: 35,
+          child: new TextFormField(
+            /*decoration: InputDecoration(
+              border: OutlineInputBorder(),
+            ),*/
+            controller: _textEditingControllers[i][j],
+            keyboardType: TextInputType.number,
+            textAlign: TextAlign.center,
+          ),
+        ));
       }
       rows.add(new Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: texts,
-
       ));
     }
 
