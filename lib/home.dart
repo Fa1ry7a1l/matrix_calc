@@ -185,7 +185,8 @@ class _HomeState extends State<Home> {
     var a = matrixSolution(matr);
     List<List<List<int>>> matrList = a[0];
     List<List<String>> stringList = a[1];
-    //printMatr(matrList.last,int.parse(l));
+    printMatr(matrList.last, int.parse(l));
+    //print(stringList);
 
     Navigator.push(
       context,

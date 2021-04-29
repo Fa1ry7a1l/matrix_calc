@@ -13,13 +13,12 @@ class ElemShow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(_matr);
-    String str = "";
+    String str;
+
     for (int i = 0; i < _matr.length; i++) {
-      for (int j = 0; j < _matr[i].length; j++) {
-        str += _matr[i][j].toString() + " ";
-      }
-      return Text(str);
+      //for (int j = 0; j < _matr[i].length; j++)
+      str += _matr[i].toString();
     }
+    return Text(str);
   }
 }

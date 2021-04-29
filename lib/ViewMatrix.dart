@@ -22,7 +22,8 @@ class Show extends StatelessWidget {
       ),
       body: Center(
         child: ListView(
-          children: _list,
+          children: List.generate(
+              _matrList.length, (index) => Text(_matrList[index].toString())),
         ),
       ),
     );
@@ -34,10 +35,12 @@ class Show extends StatelessWidget {
     //if (matrList.length - strList.length < 3) throw new Exception("Пидоры");
 
     for (int i = 0; i < strList.length; i++) {
-      list.add(new ElemShow(_matrList[i], strs: _stringList[i]));
+      print(i);
+      print(matrList[i]);
+      list.add(new ElemShow(matrList[i], strs: strList[i]));
     }
     for (int i = strList.length; i < matrList.length; i++) {
-      list.add(new ElemShow(_matrList[i]));
+      list.add(new ElemShow(matrList[i]));
     }
 
     return list;
