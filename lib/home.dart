@@ -185,7 +185,7 @@ class _HomeState extends State<Home> {
     var a = matrixSolution(matr);
     List<List<List<int>>> matrList = a[0];
     List<List<String>> stringList = a[1];
-    printMatr(matrList.last, int.parse(l));
+    //printMatr(matrList.last, int.parse(l));
     //print(stringList);
 
     Navigator.push(
@@ -197,6 +197,7 @@ class _HomeState extends State<Home> {
   List matrixSolution(List<List<int>> matr) {
     List<List<List<int>>> resMatr = [];
     List<List<String>> resStr = [];
+    resMatr.add(clone(matr));
     for (int i = 0; i < int.parse(l) && i < matr.length; i++) {
       if (matr[i][i] == 0) continue;
       List<String> resStr1 = [];
@@ -236,12 +237,7 @@ class _HomeState extends State<Home> {
         }
       }
     }
-    resMatr.add(clone(matr));
-    print(
-        "------------------------------------------------------------------------");
-    print(resMatr);
-    print(
-        "------------------------------------------------------------------------");
+    if (!resStr1.isEmpty) resMatr.add(clone(matr));
     resStr.add(resStr1);
     return [resMatr, resStr];
   }
@@ -262,7 +258,7 @@ class _HomeState extends State<Home> {
 
   _HomeState() {
     a = "3";
-    b = "6";
+    b = "3";
     l = "3";
   }
 }
