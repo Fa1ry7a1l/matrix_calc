@@ -13,12 +13,11 @@ class ElemShow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String str;
+    List<Row> rows = [];
 
-    for (int i = 0; i < _matr.length; i++) {
-      //for (int j = 0; j < _matr[i].length; j++)
-      str += _matr[i].toString();
-    }
-    return Text(str);
+    for (int i = 0; i < _matr.length; i++) {}
+    return Column(
+      children: [],
+    );
   }
 }

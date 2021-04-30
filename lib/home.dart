@@ -212,7 +212,7 @@ class _HomeState extends State<Home> {
       }
 
       resStr.add(resStr1);
-      resMatr.add(matr);
+      resMatr.add(clone(matr));
     }
     List<String> resStr1 = [];
     for (int i = 0; i < matr.length; i++) {
@@ -236,7 +236,12 @@ class _HomeState extends State<Home> {
         }
       }
     }
-    resMatr.add(matr);
+    resMatr.add(clone(matr));
+    print(
+        "------------------------------------------------------------------------");
+    print(resMatr);
+    print(
+        "------------------------------------------------------------------------");
     resStr.add(resStr1);
     return [resMatr, resStr];
   }
@@ -245,6 +250,14 @@ class _HomeState extends State<Home> {
     for (int i = 0; i < matr.length; i++) {
       print(matr[i]);
     }
+  }
+
+  List<List<int>> clone(List<List<int>> a) {
+    List<List<int>> res = [];
+    for (int i = 0; i < a.length; i++) {
+      res.add(new List<int>.from(a[i]));
+    }
+    return res;
   }
 
   _HomeState() {
