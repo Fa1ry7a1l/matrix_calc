@@ -27,34 +27,90 @@ class EnterMatrix extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Row> rows = [];
+    List<Row> rowsL = [];
+    List<Row> rowsR = [];
 
     for (int i = 0; i < _a; i++) {
-      List<Container> texts = [];
+      List<Container> textsL = [];
+      List<Container> textsR = [];
       for (int j = 0; j < _b; j++) {
-        texts.add(new Container(
-          width: 35,
-          child: new TextFormField(
-            /*decoration: InputDecoration(
-              border: OutlineInputBorder(),
-            ),*/
-            controller: _textEditingControllers[i][j],
-            keyboardType: TextInputType.number,
-            textAlign: TextAlign.center,
-          ),
-        ));
+        if (j < _l) {
+          textsL.add(new Container(
+            margin: EdgeInsets.all(5),
+            width: 35,
+            child: new TextFormField(
+              controller: _textEditingControllers[i][j],
+              keyboardType: TextInputType.number,
+              textAlign: TextAlign.center,
+            ),
+          ));
+        } else {
+          textsR.add(new Container(
+            width: 35,
+            margin: EdgeInsets.all(5),
+            child: new TextFormField(
+              controller: _textEditingControllers[i][j],
+              keyboardType: TextInputType.number,
+              textAlign: TextAlign.center,
+            ),
+          ));
+        }
       }
-      rows.add(new Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: texts,
+
+      rowsL.add(new Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: textsL,
+      ));
+      rowsR.add(new Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: textsR,
       ));
     }
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: rows,
+    if (_l >= _b) {
+      return Container(
+          margin: EdgeInsets.all(10),
+          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+          child: Column(
+            children: rowsL,
+          ),
+          decoration: BoxDecoration(
+            border: Border.all(
+                color: Color.fromARGB(255, 0, 0, 0).withOpacity(0.7)),
+            borderRadius: BorderRadius.all(
+              Radius.circular(30),
+            ),
+          ));
+    }
+    List<Widget> res = [];
+    res.add(
+      new Container(
+          margin: EdgeInsets.all(10),
+          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+          child: Column(
+            children: rowsL,
+          ),
+          decoration: BoxDecoration(
+            border: Border.all(
+                color: Color.fromARGB(255, 0, 0, 0).withOpacity(0.7)),
+            borderRadius: BorderRadius.all(
+              Radius.circular(30),
+            ),
+          )),
     );
+
+    res.add(new Container(
+        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+        child: Column(
+          children: rowsR,
+        ),
+        decoration: BoxDecoration(
+          border:
+              Border.all(color: Color.fromARGB(255, 0, 0, 0).withOpacity(0.7)),
+          borderRadius: BorderRadius.all(
+            Radius.circular(30),
+          ),
+        )));
+    return Row(mainAxisAlignment: MainAxisAlignment.center, children: res);
   }
 }

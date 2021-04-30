@@ -24,7 +24,7 @@ class _HomeState extends State<Home> {
       resizeToAvoidBottomInset: false,
       body: Center(
         child: Padding(
-          padding: EdgeInsets.all(20.0),
+          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 30),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -190,7 +190,8 @@ class _HomeState extends State<Home> {
 
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => Show(matrList, stringList)),
+      MaterialPageRoute(
+          builder: (context) => Show(matrList, stringList, int.parse(l))),
     );
   }
 
@@ -215,7 +216,7 @@ class _HomeState extends State<Home> {
       resStr.add(resStr1);
       resMatr.add(clone(matr));
     }
-    List<String> resStr1 = [];
+    List<String> resStr2 = [];
     for (int i = 0; i < matr.length; i++) {
       int min = 1000000000;
       for (int j = 0; j < matr[i].length; j++) {
@@ -232,13 +233,13 @@ class _HomeState extends State<Home> {
           for (int j = 0; j < matr[i].length; j++) {
             matr[i][j] = (matr[i][j] / x).truncate();
           }
-          resStr1.add("C${i + 1}/${x}");
+          resStr2.add("C${i + 1}/${x}");
           break;
         }
       }
     }
-    if (!resStr1.isEmpty) resMatr.add(clone(matr));
-    resStr.add(resStr1);
+    if (!resStr2.isEmpty) resMatr.add(clone(matr));
+    resStr.add(resStr2);
     return [resMatr, resStr];
   }
 
