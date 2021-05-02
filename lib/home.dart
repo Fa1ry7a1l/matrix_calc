@@ -195,10 +195,35 @@ class _HomeState extends State<Home> {
     );
   }
 
+  ///Решение СЛУ---------------------------------------------------------------------
   List matrixSolution(List<List<int>> matr) {
     List<List<List<int>>> resMatr = [];
     List<List<String>> resStr = [];
     resMatr.add(clone(matr));
+    List<bool> checked = [];
+    for (int i = 0; i < matr.length; i++) {
+      checked.add(true);
+    }
+    for (int i = 0; i < int.parse(l) && i < matr[0].length; i++) {
+      int pos = nextRow(matr, i, checked);
+      if (pos == -1) context;
+      List<String> resStr1 = [];
+      for (int x = 0; x < matr.length; x++) {
+        int k1 = matr[x][i];
+        int k2 = matr[pos][i];
+        var s = "${k2}*C${x + 1} - ${k1}*C${pos + 1}".replaceAll("- -", "+ ");
+        resStr1.add(s);
+
+        if (x == pos) continue;
+        print(pos);
+        for (int y = 0; y < matr[x].length; y++)
+          matr[x][y] = matr[x][y] * k2 - k1 * matr[pos][y];
+      }
+
+      resStr.add(resStr1);
+      resMatr.add(clone(matr));
+    }
+/*
     for (int i = 0; i < int.parse(l) && i < matr.length; i++) {
       if (matr[i][i] == 0) continue;
       List<String> resStr1 = [];
@@ -213,10 +238,13 @@ class _HomeState extends State<Home> {
           matr[x][y] = matr[x][y] * k2 - k1 * matr[i][y];
       }
 
-      resStr.add(resStr1);
-      resMatr.add(clone(matr));
-    }
+    resStr.add(resStr1);
+    resMatr.add(clone(matr));
+  }*/
+
+    ///Сокращение---------------------------------------
     List<String> resStr2 = [];
+
     for (int i = 0; i < matr.length; i++) {
       int min = 1000000000;
       for (int j = 0; j < matr[i].length; j++) {
@@ -239,7 +267,9 @@ class _HomeState extends State<Home> {
       }
     }
     if (!resStr2.isEmpty) resMatr.add(clone(matr));
+
     resStr.add(resStr2);
+
     return [resMatr, resStr];
   }
 
@@ -255,6 +285,20 @@ class _HomeState extends State<Home> {
       res.add(new List<int>.from(a[i]));
     }
     return res;
+  }
+
+  int nextRow(List<List<int>> matr, int column, List<bool> checked) {
+    if (matr.length > 0) {
+      if (matr.length == checked.length) {
+        for (int i = 0; i < matr.length; i++) {
+          if (matr[i][column] != 0 && checked[i]) {
+            checked[i] = false;
+            return i;
+          }
+        }
+      }
+    }
+    return -1;
   }
 
   _HomeState() {
