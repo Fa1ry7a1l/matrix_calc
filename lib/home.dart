@@ -206,12 +206,14 @@ class _HomeState extends State<Home> {
     }
     for (int i = 0; i < int.parse(l) && i < matr[0].length; i++) {
       int pos = nextRow(matr, i, checked);
-      if (pos == -1) context;
+      if (pos == -1) continue;
       List<String> resStr1 = [];
       for (int x = 0; x < matr.length; x++) {
         int k1 = matr[x][i];
         int k2 = matr[pos][i];
-        var s = "${k2}*C${x + 1} - ${k1}*C${pos + 1}".replaceAll("- -", "+ ");
+        var s = "${k2}*C${x + 1} - ${k1}*C${pos + 1}"
+            .replaceAll("- -", "+ ")
+            .replaceAll(" - ", " -  ");
         resStr1.add(s);
 
         if (x == pos) continue;
@@ -223,24 +225,6 @@ class _HomeState extends State<Home> {
       resStr.add(resStr1);
       resMatr.add(clone(matr));
     }
-/*
-    for (int i = 0; i < int.parse(l) && i < matr.length; i++) {
-      if (matr[i][i] == 0) continue;
-      List<String> resStr1 = [];
-      for (int x = 0; x < matr.length; x++) {
-        int k1 = matr[x][i];
-        int k2 = matr[i][i];
-        var s = "${k2}*C${x + 1} - ${k1}*C${i + 1}".replaceAll("- -", "+ ");
-        resStr1.add(s);
-
-        if (x == i || k2 == 0) continue;
-        for (int y = 0; y < matr[x].length; y++)
-          matr[x][y] = matr[x][y] * k2 - k1 * matr[i][y];
-      }
-
-    resStr.add(resStr1);
-    resMatr.add(clone(matr));
-  }*/
 
     ///Сокращение---------------------------------------
     List<String> resStr2 = [];
@@ -251,6 +235,8 @@ class _HomeState extends State<Home> {
         if ((matr[i][j]).abs() < min && matr[i][j] != 0)
           min = (matr[i][j]).abs();
       }
+
+      if (min == 1000000000) continue;
 
       for (int x = min; x >= 2; x--) {
         bool flag = true;
