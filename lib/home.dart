@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:toast/toast.dart';
 
 import 'EnterMatrix.dart';
 import 'ViewMatrix.dart';
@@ -155,14 +156,25 @@ class _HomeState extends State<Home> {
                   ),
                 ],
               ),
-
               _enterMatrix,
-              MaterialButton(
-                onPressed: ButtonPressed,
-                color: Color.fromARGB(255, 159, 159, 237),
-                minWidth: 200.0,
-                child: Text("Создать матрицу"),
-              ), // Добавить функцию генераци
+              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                MaterialButton(
+                  onPressed: ButtonPressed,
+                  color: Color.fromARGB(255, 159, 159, 237),
+                  minWidth: 200.0,
+                  child: Text("Создать матрицу"),
+                ),
+                Row(
+                  children: [
+                    MaterialButton(
+                        onPressed: DEleteEls,
+                        color: Color.fromARGB(255, 159, 159, 237),
+                        minWidth: 200.0,
+                        child: Text("Очистить матрицу"))
+                  ],
+                  mainAxisAlignment: MainAxisAlignment.end,
+                ),
+              ]),
             ],
           ),
         ),
@@ -170,29 +182,52 @@ class _HomeState extends State<Home> {
     );
   }
 
+  Future<void> DEleteEls() async {
+    _enterMatrix.DeleteText();
+  }
+
   Future<void> ButtonPressed() async {
     List<List<TextEditingController>> controllers =
         _enterMatrix.getControllers();
+
+    bool flag = true;
+
+    //print(controllers[0][0].value);
+
     List<List<int>> matr = [];
     for (int i = 0; i < controllers.length; i++) {
       List<int> r = [];
       for (int j = 0; j < controllers[i].length; j++) {
-        r.add(int.parse(
-            controllers[i][j].text.replaceAll('.', "").replaceAll(",", "")));
+        try {
+          r.add(int.parse(
+              controllers[i][j].text.replaceAll('.', "").replaceAll(",", "")));
+        } catch (e) {
+          flag = false;
+          break;
+        }
       }
       matr.add(r);
     }
-    var a = matrixSolution(matr);
-    List<List<List<int>>> matrList = a[0];
-    List<List<String>> stringList = a[1];
-    //printMatr(matrList.last, int.parse(l));
-    //print(stringList);
+    //flag = false;
 
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-          builder: (context) => Show(matrList, stringList, int.parse(l))),
-    );
+    if (!flag) {
+      Toast.show("Неверно введена матрица!", context,
+          duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
+    } else {
+      var a = matrixSolution(matr);
+      List<List<List<int>>> matrList = a[0];
+      List<List<String>> stringList = a[1];
+      //printMatr(matrList.last, int.parse(l));
+      //print(stringList);
+
+      print("Length = " + matr.length.toString());
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => Show(matrList, stringList, int.parse(l))),
+      );
+    }
   }
 
   ///Решение СЛУ---------------------------------------------------------------------

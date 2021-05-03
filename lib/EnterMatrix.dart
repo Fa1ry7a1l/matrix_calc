@@ -25,6 +25,13 @@ class EnterMatrix extends StatelessWidget {
     return _textEditingControllers;
   }
 
+  void DeleteText() {
+    for (int i = 0; i < _textEditingControllers.length; i++)
+      for (var j = 0; j < _textEditingControllers[i].length; j++) {
+        _textEditingControllers[i][j].clear();
+      }
+  }
+
   @override
   Widget build(BuildContext context) {
     List<Row> rowsL = [];
@@ -35,20 +42,30 @@ class EnterMatrix extends StatelessWidget {
       List<Container> textsR = [];
       for (int j = 0; j < _b; j++) {
         if (j < _l) {
-          textsL.add(new Container(
-            margin: EdgeInsets.all(5),
-            width: 35,
-            child: new TextFormField(
-              controller: _textEditingControllers[i][j],
-              keyboardType: TextInputType.number,
-              textAlign: TextAlign.center,
+          textsL.add(
+            new Container(
+              margin: EdgeInsets.all(5),
+              width: 35,
+              child: new TextFormField(
+                decoration: InputDecoration(hintText: '0'),
+                onFieldSubmitted: (text) {
+                  print("Введенный текст: $text");
+                },
+                controller: _textEditingControllers[i][j],
+                keyboardType: TextInputType.number,
+                textAlign: TextAlign.center,
+              ),
             ),
-          ));
+          );
         } else {
           textsR.add(new Container(
             width: 35,
             margin: EdgeInsets.all(5),
             child: new TextFormField(
+              decoration: InputDecoration(hintText: '0'),
+              onFieldSubmitted: (text) {
+                print("Введенный текст: $text");
+              },
               controller: _textEditingControllers[i][j],
               keyboardType: TextInputType.number,
               textAlign: TextAlign.center,
