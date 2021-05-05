@@ -156,23 +156,28 @@ class _HomeState extends State<Home> {
                   ),
                 ],
               ),
-              _enterMatrix,
+              Stack(
+                children: [
+                  Row(
+                    children: [
+                      IconButton(
+                        icon: const Icon(Icons.cancel),
+                        padding: EdgeInsets.fromLTRB(50, 0, 0, 50),
+                        onPressed: DEleteEls,
+                        color: Color.fromARGB(255, 159, 159, 237),
+                      ),
+                    ],
+                    mainAxisAlignment: MainAxisAlignment.end,
+                  ),
+                  _enterMatrix,
+                ],
+              ),
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 MaterialButton(
                   onPressed: ButtonPressed,
                   color: Color.fromARGB(255, 159, 159, 237),
                   minWidth: 200.0,
                   child: Text("Создать матрицу"),
-                ),
-                Row(
-                  children: [
-                    MaterialButton(
-                        onPressed: DEleteEls,
-                        color: Color.fromARGB(255, 159, 159, 237),
-                        minWidth: 200.0,
-                        child: Text("Очистить матрицу"))
-                  ],
-                  mainAxisAlignment: MainAxisAlignment.end,
                 ),
               ]),
             ],
@@ -202,32 +207,26 @@ class _HomeState extends State<Home> {
           r.add(int.parse(
               controllers[i][j].text.replaceAll('.', "").replaceAll(",", "")));
         } catch (e) {
-          flag = false;
-          break;
+          r.add(0);
         }
       }
       matr.add(r);
     }
     //flag = false;
 
-    if (!flag) {
-      Toast.show("Неверно введена матрица!", context,
-          duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
-    } else {
-      var a = matrixSolution(matr);
-      List<List<List<int>>> matrList = a[0];
-      List<List<String>> stringList = a[1];
-      //printMatr(matrList.last, int.parse(l));
-      //print(stringList);
+    var a = matrixSolution(matr);
+    List<List<List<int>>> matrList = a[0];
+    List<List<String>> stringList = a[1];
+    //printMatr(matrList.last, int.parse(l));
+    //print(stringList);
 
-      print("Length = " + matr.length.toString());
+    print("Length = " + matr.length.toString());
 
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => Show(matrList, stringList, int.parse(l))),
-      );
-    }
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => Show(matrList, stringList, int.parse(l))),
+    );
   }
 
   ///Решение СЛУ---------------------------------------------------------------------
